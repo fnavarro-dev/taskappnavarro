@@ -7,4 +7,20 @@
     <color name="pink">#FFEFB8C8</color>
     <color name="brown">#FF434343</color>
     <color name="whity">#FFF0F0F0</color>
+
+    <!-- 'Dark Color Scheme' que sugiere el requerimiento -->
+    <color name="primaryColor">#FFD0BCFF</color>
+    <color name="secondaryColor">#FFCCC2DC</color>
+    <color name="tertiaryColor">#FFEFB8C8</color>
+    <color name="backgroundColor">#FF434343</color>
+    <color name="surfaceColor">#FFF0F0F0</color>
+
+    <!-- 'Light Color Scheme' que sugiere el requerimiento -->
+    <color name="primaryColorLight">#FF6650a4</color>
+    <color name="secondaryColorLight">#FF625b71</color>
+    <color name="tertiaryColorLight">#FF7D5260</color>
+    <color name="backgroundColorLight">#FFF0F0F0</color>
+    <color name="surfaceColorLight">#FF434343</color>
+
+
 </resources>

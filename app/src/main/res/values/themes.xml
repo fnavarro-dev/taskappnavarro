@@ -1,8 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.TaskAppNavarro" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primaryColorLight</item>
+        <item name="colorPrimaryVariant">@color/primaryColorLight</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/secondaryColorLight</item>
+        <item name="colorTertiary">@color/tertiaryColorLight</item>
+        <item name="android:windowBackground">@color/backgroundColorLight</item>
+        <item name="android:colorBackground">@color/backgroundColorLight</item>
+        <item name="colorSurface">@color/surfaceColorLight</item>
+        <item name="colorOnSurface">@color/surfaceColorLight</item>
     </style>
 
     <style name="Theme.TaskAppNavarro" parent="Base.Theme.TaskAppNavarro" />
