@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,7 +14,7 @@ import com.example.taskappnavarro.R
 import com.example.taskappnavarro.databinding.FragmentTaskListBinding
 import com.example.taskappnavarro.view.adapters.TasksAdapter
 import com.example.taskappnavarro.viewmodel.DataViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class TaskListFragment : Fragment() {
     private lateinit var binding: FragmentTaskListBinding
@@ -49,33 +48,22 @@ class TaskListFragment : Fragment() {
         taskAdapter.onCheckedChange = { taskID, isChecked ->
             dataViewModel.isTaskCompleted(taskID.id, isChecked)
         }
-        // Se incorpora un listener para eliminar una tarea con pulsación prolongada
+        // Se incorpora un listener para mostrar un diálogo de confirmación al mantener pulsada la tarea
         taskAdapter.onLongClick = { taskID ->
-            showDeleteConfirmationDialog(taskID)
+            mostrarDialogoConfirmacionEliminacion(taskID)
         }
     }
 
-    private fun showDeleteConfirmationDialog(taskID: String) {
-        val position = taskAdapter.tasks.indexOfFirst { it.id == taskID }
-        val taskViewHolder = recyclerView.findViewHolderForAdapterPosition(position)
-
-        AlertDialog.Builder(requireContext())
+    private fun mostrarDialogoConfirmacionEliminacion(taskID: String) {
+        MaterialAlertDialogBuilder(requireContext())
             .setTitle("¿Desea eliminar la tarea?")
-            .setMessage("Esta acción no se puede deshacer.")
             .setPositiveButton("Borrar") { _, _ ->
-                // Ocultar la tarea temporalmente
-                taskViewHolder?.itemView?.visibility = View.GONE
-                Snackbar.make(binding.root, "Tarea eliminada", Snackbar.LENGTH_LONG)
-                    .setAction("Deshacer") {
-                        // Mostrar la tarea nuevamente si se deshace
-                        taskViewHolder?.itemView?.visibility = View.VISIBLE
-                    }
-                    .setDuration(5000) // 5 segundos para deshacer
-                    .show()
+                dataViewModel.deleteTask(taskID)
             }
             .setNegativeButton("Cancelar", null)
             .show()
     }
+
 
     private fun startRecyclerView() {
         recyclerView = binding.listView
