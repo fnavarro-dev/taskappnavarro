@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.TaskAppNavarroNOdefaultsplash" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Desactiva la splash screen predeterminada -->
+        <item name="android:windowDisablePreview">true</item>
+
+
+    </style>
+
+
+
+
+
+
+</resources>
