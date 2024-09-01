@@ -17,15 +17,18 @@
         android:theme="@style/Theme.TaskAppNavarro"
         tools:targetApi="34"
         >
-        <activity
-            android:name="com.example.taskappnavarro.view.activities.MainActivity"
-            android:exported="true"
-            >
+        <activity android:name="com.example.taskappnavarro.view.StartActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.example.taskappnavarro.view.activities.MainActivity"
+            android:exported="true">
+
         </activity>
     </application>
 

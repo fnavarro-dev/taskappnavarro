@@ -83,10 +83,11 @@ class TaskListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTaskListBinding.inflate(inflater, container, false)
-        getTasks()
+        // Se configura el RecyclerView, los listeners y el adaptador
         startRecyclerView()
         setupTaskDetailNavigation()
         setupStartNewTask()
+        getTasks() //se pone al final el cargar los datos, primero se configura la UI (RecyclerView, Listeners, Adapters)
         return binding.root
     }
 }

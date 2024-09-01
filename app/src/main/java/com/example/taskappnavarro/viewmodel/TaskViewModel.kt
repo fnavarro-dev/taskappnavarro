@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.taskappnavarro.model.room.TaskEntity
 import com.example.taskappnavarro.model.retrofit.TaskService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.UUID
@@ -16,7 +17,7 @@ class TaskViewModel : ViewModel() {
     val currentData = MutableLiveData<TaskEntity>(null)
 
     fun getData() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val result = taskService.getData()
             dataListFromDatabase = result
 

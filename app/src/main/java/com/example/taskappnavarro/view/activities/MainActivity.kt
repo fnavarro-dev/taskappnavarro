@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.taskappnavarro.R
 import com.example.taskappnavarro.databinding.ActivityMainBinding
-import com.example.taskappnavarro.view.fragments.StartFragment
 import com.example.taskappnavarro.view.fragments.TaskListFragment
 import com.example.taskappnavarro.viewmodel.TaskViewModel
 
@@ -14,7 +13,6 @@ class MainActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityMainBinding
     private val taskListFragment = TaskListFragment()
-    private val startFragment = StartFragment()
     
     private val taskViewModel: TaskViewModel by viewModels()
 
@@ -28,8 +26,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = "TaskAppNavarro"
 
-        // Mostrar el fragment de inicio al comienzo
-        //setCurrentFragment(startFragment)
 
 
         initUI()
