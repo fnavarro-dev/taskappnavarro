@@ -1,72 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.taskappnavarro.view.fragments.TaskDetailFragment"
-    >
+    tools:context="com.example.taskappnavarro.view.fragments.TaskDetailFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"> <!-- Margen para el botón -->
 
         <LinearLayout
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            
-            >
+            android:layout_height="match_parent"
+            android:background="?android:attr/colorBackground"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <EditText
-                android:id="@+id/taskTitle"
+            <!-- Campo de texto para el título de la tarea -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textColor="@color/brown"
-                android:textSize="25sp"
-                tools:text="@string/app_name"
-                />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Título de la tarea"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="?attr/colorPrimary">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/taskTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="20sp"
+                    tools:text="@string/app_name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Imagen relacionada con la tarea -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgData"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic[1]" />
+
+            <!-- Campo de texto para la fecha de creación -->
+            <TextView
+                android:id="@+id/creationDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="16sp"
+                tools:text="Fecha de creación: 2024-01-25" />
+
+            <!-- Campo de texto para la fecha de expiración -->
+            <TextView
+                android:id="@+id/dueDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="16sp"
+                tools:text="Fecha de expiración: 2024-12-31" />
+
+            <!-- Campo de texto para la descripción de la tarea -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Descripción de la tarea"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="?attr/colorPrimary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/taskDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:minHeight="200dp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp"
+                    tools:text="Montes neque etiam enim vel curae; accumsan malesuada egestas leo ornare convallis aliquam at. Magna posuere bibendum laoreet quis libero" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botón para guardar -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnComplete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                app:backgroundTint="?attr/colorPrimary"
+                app:tint="?attr/colorOnPrimary"
+                android:contentDescription="@string/save"
+                android:src="@drawable/baseline_save_24" />
         </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic[1]"
-            />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/taskDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Montes neque etiam enim vel curae; accumsan malesuada egestas leo ornare convallis aliquam at. Magna posuere bibendum laoreet quis libero
-Montes neque etiam enim vel curae; accumsan malesuada egestas leo ornare convallis aliquam at. Magna posuere bibendum laoreet quis libero
-Montes neque etiam enim vel curae; accumsan malesuada egestas leo ornare convallis aliquam at. Magna posuere bibendum laoreet quis libero"
-            />
-
-        <Button
-            android:id="@+id/btnComplete"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:text="Guardar"
-            />
-
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

@@ -1,10 +1,10 @@
 package com.example.taskappnavarro.model
 
-import com.example.taskappnavarro.model.room.DataEntity
+import com.example.taskappnavarro.model.room.TaskEntity
 import com.example.taskappnavarro.model.model.Task
 
 
-fun Task.toDataEntity(): DataEntity = DataEntity(
+fun Task.toDataEntity(): TaskEntity = TaskEntity(
     id = this.id,
     title = this.title,
     content = this.content,
@@ -14,7 +14,7 @@ fun Task.toDataEntity(): DataEntity = DataEntity(
     completed = this.isDone
 )
 
-fun DataEntity.toDataModel(): Task = Task(
+fun TaskEntity.toDataModel(): Task = Task(
     id = this.id,
     title = this.title,
     content = this.content,
@@ -24,5 +24,5 @@ fun DataEntity.toDataModel(): Task = Task(
     isDone = this.completed,
 )
 
-fun List<DataEntity>.toListDataModel(): List<Task> = this.map { it.toDataModel() }
-fun List<Task>.toListDataEntity(): List<DataEntity> = this.map { it.toDataEntity() }
+fun List<TaskEntity>.toListDataModel(): List<Task> = this.map { it.toDataModel() }
+fun List<Task>.toListDataEntity(): List<TaskEntity> = this.map { it.toDataEntity() }

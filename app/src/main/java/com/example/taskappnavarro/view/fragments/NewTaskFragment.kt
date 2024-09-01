@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.taskappnavarro.R
 import com.example.taskappnavarro.databinding.FragmentNewTaskBinding
-import com.example.taskappnavarro.viewmodel.DataViewModel
+import com.example.taskappnavarro.viewmodel.TaskViewModel
 
 class NewTaskFragment : Fragment() {
     private lateinit var binding: FragmentNewTaskBinding
-    private val taskViewModel: DataViewModel by activityViewModels()
+    private val taskViewModel: TaskViewModel by activityViewModels()
 
     private fun setCurrentFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction().apply {

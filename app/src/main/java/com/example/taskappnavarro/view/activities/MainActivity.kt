@@ -6,44 +6,49 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.taskappnavarro.R
 import com.example.taskappnavarro.databinding.ActivityMainBinding
+import com.example.taskappnavarro.view.fragments.StartFragment
 import com.example.taskappnavarro.view.fragments.TaskListFragment
-import com.example.taskappnavarro.viewmodel.DataViewModel
+import com.example.taskappnavarro.viewmodel.TaskViewModel
 
 class MainActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityMainBinding
     private val taskListFragment = TaskListFragment()
+    private val startFragment = StartFragment()
     
-    private val dataViewModel: DataViewModel by viewModels()
-    
+    private val taskViewModel: TaskViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Configurar la barra de herramientas
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "TaskAppNavarro"
+
+        // Mostrar el fragment de inicio al comienzo
+        //setCurrentFragment(startFragment)
+
+
         initUI()
     }
     
-    //Esta estructura se toma de la experiencia compartida por Pedro
-    //La cual consiste en separar los métodos en diferentes responsabilidades
+
     private fun initUI() {
         initUIState()
         initUIListener()
     }
     
     private fun initUIState() {
-        dataViewModel.getData()
+        taskViewModel.getData()
         startDataListFragment()
     }
     
     private fun startDataListFragment() {
         setCurrentFragment(taskListFragment)
-        dataViewModel.resultDataList()
+        taskViewModel.resultDataList()
     }
     
     private fun initUIListener() {
@@ -55,5 +60,26 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.frameLayoutFragment, fragment)
             commit()
         }
+    }
+
+    // Método para actualizar la barra de herramientas cuando se muestra el detalle de la tarea
+    fun updateToolbarForDetails(taskTitle: String) {
+        supportActionBar?.apply {
+            title = taskTitle
+            setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    // Método para restaurar la barra de herramientas cuando se vuelve a la lista de tareas
+    fun updateToolbarForList() {
+        supportActionBar?.apply {
+            title = "TaskAppNavarro"
+            setDisplayHomeAsUpEnabled(false)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

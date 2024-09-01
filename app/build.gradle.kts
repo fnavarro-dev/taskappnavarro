@@ -74,4 +74,8 @@ dependencies {
     //Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+    // Con esta dependencia ponemos sabor a la app con una animación de inicio
+    implementation("com.airbnb.android:lottie:4.2.0")
+
 }

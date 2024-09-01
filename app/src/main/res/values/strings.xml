@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hola, fragmento sin nada por aquí</string>
     <string name="add_task">Añadir tarea</string>
+    <string name="save">Guardar</string>
+    <string name="creation_date">Fecha de Creación</string>
+    <string name="due_date">Fecha Límite</string>
 </resources>

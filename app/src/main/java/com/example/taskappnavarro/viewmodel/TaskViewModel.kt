@@ -3,17 +3,17 @@ package com.example.taskappnavarro.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.taskappnavarro.model.room.DataEntity
+import com.example.taskappnavarro.model.room.TaskEntity
 import com.example.taskappnavarro.model.retrofit.TaskService
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.UUID
 
-class DataViewModel : ViewModel() {
+class TaskViewModel : ViewModel() {
     private val taskService = TaskService()
-    private var dataListFromDatabase: List<DataEntity> = emptyList()
-    val data = MutableLiveData<List<DataEntity>>(null)
-    val currentData = MutableLiveData<DataEntity>(null)
+    private var dataListFromDatabase: List<TaskEntity> = emptyList()
+    val data = MutableLiveData<List<TaskEntity>>(null)
+    val currentData = MutableLiveData<TaskEntity>(null)
 
     fun getData() {
         viewModelScope.launch {
@@ -53,9 +53,7 @@ class DataViewModel : ViewModel() {
         }
     }
 
-    //Se genera un UUID aleatorio para el id de la nueva tarea,
-    //también se genera una fecha de creación y una fecha de vencimiento
-    //para la tarea.
+
     fun createTask(title: String, content: String) {
         viewModelScope.launch {
             val uuid = UUID.randomUUID().toString()
@@ -65,14 +63,14 @@ class DataViewModel : ViewModel() {
             val image = ""
             val isDone = false
 
-            val newData = DataEntity(uuid, title, content, creationDate, dueDate, image, isDone)
+            val newData = TaskEntity(uuid, title, content, creationDate, dueDate, image, isDone)
             taskService.saveData(newData)
             val result = taskService.getData()
             data.postValue(result)
         }
     }
 
-    private fun setCurrentData(item: DataEntity) {
+    private fun setCurrentData(item: TaskEntity) {
         currentData.postValue(item)
     }
 
@@ -84,28 +82,7 @@ class DataViewModel : ViewModel() {
         }
     }
 
-    //borrar temporalmente una tarea
-    fun deleteTaskTemporarily(id: String) {
-        viewModelScope.launch {
-            // Elimina la tarea temporalmente de la lista
-            val updatedList = dataListFromDatabase.filter { it.id != id }
-            dataListFromDatabase = updatedList
-            data.postValue(updatedList)
-        }
-    }
 
-    // Recupera la tarea eliminada de la base de datos y la vuelve a añadir a la lista
-    fun restoreTask(id: String) {
-        viewModelScope.launch {
-            // Recupera la tarea eliminada de la base de datos y la vuelve a añadir a la lista
-            val restoredTask = taskService.getDataById(id)
-            val updatedList = dataListFromDatabase.toMutableList().apply {
-                add(restoredTask)
-            }
-            dataListFromDatabase = updatedList
-            data.postValue(updatedList)
-        }
-    }
 
 
 }

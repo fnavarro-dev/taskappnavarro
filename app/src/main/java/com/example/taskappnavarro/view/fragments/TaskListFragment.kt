@@ -13,17 +13,17 @@ import com.example.taskappnavarro.model.toListDataModel
 import com.example.taskappnavarro.R
 import com.example.taskappnavarro.databinding.FragmentTaskListBinding
 import com.example.taskappnavarro.view.adapters.TasksAdapter
-import com.example.taskappnavarro.viewmodel.DataViewModel
+import com.example.taskappnavarro.viewmodel.TaskViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class TaskListFragment : Fragment() {
     private lateinit var binding: FragmentTaskListBinding
     private var taskAdapter: TasksAdapter = TasksAdapter()
-    private val dataViewModel: DataViewModel by activityViewModels()
+    private val taskViewModel: TaskViewModel by activityViewModels()
     private lateinit var recyclerView: RecyclerView
 
     private fun getTasks() {
-        dataViewModel.data.observe(viewLifecycleOwner) {
+        taskViewModel.data.observe(viewLifecycleOwner) {
             if(it != null && it.isNotEmpty()) {
                 taskAdapter.setListTasks(it.toListDataModel())
             }
@@ -46,7 +46,7 @@ class TaskListFragment : Fragment() {
         }
         // Se incorpora un listener para la casilla que se marca para indicar una tarea terminada
         taskAdapter.onCheckedChange = { taskID, isChecked ->
-            dataViewModel.isTaskCompleted(taskID.id, isChecked)
+            taskViewModel.isTaskCompleted(taskID.id, isChecked)
         }
         // Se incorpora un listener para mostrar un diálogo de confirmación al mantener pulsada la tarea
         taskAdapter.onLongClick = { taskID ->
@@ -58,7 +58,7 @@ class TaskListFragment : Fragment() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("¿Desea eliminar la tarea?")
             .setPositiveButton("Borrar") { _, _ ->
-                dataViewModel.deleteTask(taskID)
+                taskViewModel.deleteTask(taskID)
             }
             .setNegativeButton("Cancelar", null)
             .show()

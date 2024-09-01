@@ -6,17 +6,17 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface DataDao {
+interface TaskDao {
     //Por tiempo no se recurrió a utilizar las anotaciones esperadas
     //Sin embargo todas cumplen con el propósito de acceder a la data
     @Query("SELECT * FROM data_entity")
-    suspend fun getAllData(): List<DataEntity>
+    suspend fun getAllData(): List<TaskEntity>
     
     @Query("SELECT * FROM data_entity WHERE id = :id")
-    suspend fun getDataById(id: String): DataEntity
+    suspend fun getDataById(id: String): TaskEntity
     
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveData(data: DataEntity)
+    suspend fun saveData(data: TaskEntity)
     
     @Query("DELETE FROM data_entity")
     suspend fun deleteAllData()

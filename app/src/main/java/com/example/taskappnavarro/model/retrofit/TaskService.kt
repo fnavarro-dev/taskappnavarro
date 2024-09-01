@@ -1,7 +1,7 @@
 package com.example.taskappnavarro.model.retrofit
 
 import com.example.taskappnavarro.TaskManagement
-import com.example.taskappnavarro.model.room.DataEntity
+import com.example.taskappnavarro.model.room.TaskEntity
 import com.example.taskappnavarro.model.toDataEntity
 import com.example.taskappnavarro.model.model.Task
 import com.example.taskappnavarro.model.provider.TaskProvider
@@ -13,7 +13,7 @@ class TaskService {
 
     //El siguiente método cumple con la responsabilidad de vincular la información
     //de la API con la de la base de datos.
-    suspend fun getData(): List<DataEntity> {
+    suspend fun getData(): List<TaskEntity> {
         val dataFromDatabase = getDataFromDatabase()
 
         if (dataFromDatabase.isEmpty()) {
@@ -30,13 +30,13 @@ class TaskService {
     
     //Debido a que sólo se cumple con acceder a la data con la API
     //los demás métodos sólo se encargarán de acceder a la base de datos.
-    suspend fun getDataById(id: String): DataEntity {
+    suspend fun getDataById(id: String): TaskEntity {
         return withContext(Dispatchers.IO) {
             TaskManagement.database.dataDao().getDataById(id)
         }
     }
 
-    suspend fun getDataFromDatabase(): List<DataEntity> =
+    suspend fun getDataFromDatabase(): List<TaskEntity> =
         TaskManagement.database.dataDao().getAllData()
 
     suspend fun getDataFromAPI(): List<Task> {
@@ -56,7 +56,7 @@ class TaskService {
         }
     }
     
-    suspend fun saveData(data: DataEntity) {
+    suspend fun saveData(data: TaskEntity) {
         TaskManagement.database.dataDao().saveData(data)
     }
     
